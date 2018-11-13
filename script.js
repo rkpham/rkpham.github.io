@@ -1,14 +1,10 @@
 var title = document.getElementById("Title")
-var num = 1
-if Cookies.get("NumClicks") !== undefined {
-	num = Cookies.get("NumClicks")
-} else {
-	num = 1
-}
+var num = Cookies.get("NumClicks")
+title.innerHTML = "You have clicked the button "+num+" times"
 
 function change() {
-	title.innerHTML = "You have clicked the button "+num+" times"
 	num++
+	title.innerHTML = "You have clicked the button "+num+" times"
 
 	Cookies.set("NumClicks", num)
 }
