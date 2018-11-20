@@ -6,6 +6,11 @@ body {
 	margin: auto;
 	text-align: center;
 }
+#index {
+	text-align:center;
+	padding: 4%;
+	font-size: 25px
+}
 h1 {
 	text-align: center;
 	color: red;
