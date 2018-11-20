@@ -1,6 +1,8 @@
-let amount = document.getElementById("amount")
+var amount = document.getElementById("amount")
+var aclickers = document.getElementById("aclickers")
+var btncost = document.getElementById("btncost")
 
-let game = {
+var game = {
 	cost: 1,
 	bought: 0,
 	points: 1,
@@ -8,7 +10,7 @@ let game = {
 }
 
 function change() {
-	if (points >= cost) {
+	if (game.points >= game.cost) {
 		game.bought += 1
 		game.points -= game.cost
 		game.cost += game.cost
@@ -18,4 +20,6 @@ function change() {
 setInterval(function(){
 	game.points += game.bought
 	amount.innerHTML = game.points
-}, 500)
+	aclickers.innerHTML = game.bought
+	btncost.innerHTML = game.cost
+}, 200)
