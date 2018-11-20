@@ -8,10 +8,6 @@ let game = {
 
 var lastscore = 0
 
-Number.prototype.clamp = function(min, max) {
-  return Math.min(Math.max(this, min), max);
-};
-
 function calccost(level, rank) {
 	return Math.round(
 		10 //base num
