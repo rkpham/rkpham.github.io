@@ -1,0 +1,25 @@
+body {
+	background-color: skyblue;
+}
+h1 {
+	text-align: center;
+	color: red;
+}
+clickey {
+    	margin: 0 auto;
+}
+.btn {
+  margin: 10px auto;
+  width: 130px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: grey;
+  color: white;
+  vertical-align: top;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+.btn:hover {
+  background-color: rgb(125, 151, 118);
+}
