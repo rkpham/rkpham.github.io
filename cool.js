@@ -11,7 +11,7 @@ var lastscore = 0
 function calccost(level, rank) {
 	return Math.round(
 		10 //base num
-		*Math.pow(1.2, level) //multiplier for every level
+		*Math.pow(1.15, level) //multiplier for every level
 		*Math.pow(10, rank) //multiplier for each version/rank
 	)
 }
