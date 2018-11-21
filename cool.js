@@ -11,7 +11,7 @@ var lastscore = 0
 function calccost(level, rank) {
 	return Math.round(
 		10 //base num
-		*Math.pow(1.4, level) //multiplier for every level
+		*Math.pow(1.2, level) //multiplier for every level
 		*Math.pow(10, rank) //multiplier for each version/rank
 	)
 }
@@ -19,14 +19,6 @@ function calccost(level, rank) {
 function clickb() {
 	game.points ++
 	document.getElementById("points").innerHTML = game.points
-
-	for (var i=0;i<5;i++) {
-		if (game.points >= calccost(game.bought[x], x)) {
-			document.getElementById("b"+String(i)).style.color = "gray"
-		} else {
-			document.getElementById("b"+String(i)).style.color = "white"
-		}
-	}
 }
 
 function buy(x) {
@@ -36,8 +28,6 @@ function buy(x) {
 		document.getElementById("c"+String(x)).innerHTML = calccost(game.bought[x]+1, x)
 		game.bought[x] ++
 		document.getElementById("v"+String(x)).innerHTML = game.bought[x]
-
-		
 	}
 }
 
