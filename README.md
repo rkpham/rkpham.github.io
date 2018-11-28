@@ -1,4 +1,2 @@
-# hi
-hey this is a website where im making a thing
-
-cool
+# Hello-
+Learning to make an incremental game with JavaScript
