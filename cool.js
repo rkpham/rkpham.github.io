@@ -1,71 +1,77 @@
-let game = {
-	points: 0,
-	bought: [0, 0, 0, 0, 0],
-	prestige: 0,
+var	code = new Decimal(0)
+var money = new Decimal(0)
+var programmers = 0
+var clickmultiplier = new Decimal(1)
+var compilemultiplier = new Decimal(1)
 
-	clickx: 1
+var programmercost = 50
+var maxbasemoney = 30
+var basemoneycurve = 1000
+
+function calcfunc(lines, errors) { //x is lines, m is upgrade, e is # of errors
+	return ((maxbasemoney-(basemoneycurve/(lines+(basemoneycurve/maxbasemoney)))))-(((errors/lines)/2)*(maxbasemoney-(basemoneycurve/(lines+(basemoneycurve/maxbasemoney)))))
 }
 
-var lastscore = 0
-
-function calccost(level, rank) {
-	return Math.round(
-		10 //base num
-		*Math.pow(1.25, level) //multiplier for every level
-		*Math.pow(10, rank) //multiplier for each version/rank
-	)
-}
-function clickb() {
-	game.points ++
-	document.getElementById("points").innerHTML = numberformat.formatShort(game.points)
+function calcerrors(lines) { 
+	return Math.floor(Math.random()*Math.round(lines))
 }
 
-function buy(x) {
-	if (game.points >= calccost(game.bought[x], x)) {
-		game.points -= calccost(game.bought[x], x)
-		game.bought[x] ++
-		document.getElementById("points").innerHTML = numberformat.formatShort(game.points)
-		document.getElementById("c"+String(x)).innerHTML = numberformat.formatShort(calccost(game.bought[x], x))
-		document.getElementById("v"+String(x)).innerHTML = numberformat.formatShort(game.bought[x])
-		if (game.bought[x] == 10) {
-			console.log("hey")
-			var newbutton = $("#button1").clone()
-			$(newbutton).insertAfter("#button1")
-			$(newbutton).attr("id", "button2")
-			
-			$("#button2 #b0").attr(
-				{
-				"id" : "b"+String(x+1),
-				"onclick" : "buy("+String(x+1)+")"
-				}
-			)
-			document.getElementById("b1").innerHTML = 
-			'BUY V'
-			+String(x+1)
-			+'<br>COST: <span id="c'
-			+String(x+1)
-			+'">'
-			+calccost(game.bought[x], x)
-			+'</span>'
+function writecode() {
+	code = code.add(1)
+	programmable = true
+	document.getElementById("numcode").innerHTML = code.toFixed(1)
+	$("#programbutton").attr("class", "btn interact")
+}
 
-			var newind = $("#indic0").clone()
-			$(newind).insertAfter("indic0")
+function programcode() {
+	if (code >= 1) {
+		let errors = calcerrors(code.toNumber())
+		let moneyearned = calcfunc(code.toNumber(), errors)
+		let errorpercent = (errors/code.toNumber())*50
+
+		$("#programbutton").attr("class", "btndisable")
+		code = new Decimal(0)
+		money = money.add(Math.round(moneyearned*100)/100)
+		document.getElementById("numcode").innerHTML = "0.0"
+		document.getElementById("nummoney").innerHTML = money.toFixed(2)
+		document.getElementById("numerrors").innerHTML = errors
+		document.getElementById("moneygot").innerHTML = moneyearned.toFixed(2)
+		document.getElementById("errorpercentage").innerHTML = errorpercent.toFixed(2)
+		if (money >= programmercost) {
+			$("#programmer").attr("class", "btn interact")
 		}
 	}
 }
 
-setInterval(function() {
-	game.points += game.bought[0]
-	game.bought[0] += game.bought[1]
-
-	document.getElementById("points").innerHTML = numberformat.formatShort(game.points)
-	document.getElementById("v0").innerHTML = numberformat.formatShort(game.bought[0])
-
-	if (game.points-lastscore < 0) {
-		document.getElementById("psec").innerHTML = 0
+function hireprogrammer() {
+	if (money >= programmercost) {
+		money = money.sub(programmercost)
+		programmers += 1
+		document.getElementById("nummoney").innerHTML = money.toFixed(2)
+		document.getElementById("numprogrammers").innerHTML = programmers
 	} else {
-		document.getElementById("psec").innerHTML = numberformat.formatShort(game.points-lastscore)
+		$("#programmer").attr("class", "btndisable")
 	}
+}
 
-	lastscore = game.points
-}, 800)
+function hiremanager() {
+
+}
+
+setInterval(function() {
+	code = code.add(programmers*0.005)
+	document.getElementById("numcode").innerHTML = code.toFixed(1)
+	document.getElementById("nummoney").innerHTML = money.toFixed(2)
+	document.getElementById("numprogrammers").innerHTML = programmers
+
+	if (money >= programmercost) {
+		$("#programmer").attr("class", "btn interact")
+	} else {
+		$("#programmer").attr("class", "btndisable")
+	}
+	if (code >= 1) {
+		$("#programbutton").attr("class", "btn interact")
+	} else {
+		$("#programbutton").attr("class", "btndisable")
+	}
+}, 10)

@@ -4,37 +4,51 @@
 <head>
 	<title>Cool Game</title>
 	<link rel="stylesheet" href="cool.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.0.1/decimal.min.js"></script>
 	<script src="//cdn.rawgit.com/erosson/swarm-numberformat/v0.4.0/dist/swarm-numberformat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="cool.js"></script>
 </head>
 <!-- body -->
 <body id='body'>
 
-<h1>You have <span id="points">0</span> points</h1>
-
-<div id="basic">
-	<div id="textind">
-		<div>
-			<p id="sectext" class="ctext">You are getting <span id="psec">0</span> points/sec</p>
-		</div>
-		<div id="indic0">
-			<p id="indbought" class="ctext">You have <span id="v0">0</span> V0s</p>
-		</div>
-	</div>
-	<div id="buttons">
-		<div id="button0">
-			<button id="clicky" class="btn" onclick="clickb()">CLICK</button>
-		</div>
-		<div id="button1">
-			<button id="b0" class="btn" onclick="buy(0)">BUY V0<br>COST: <span id="c0">10</span></button>
-		</div>
-	</div>
+<div class="spaced" id="lsofcode">
+	<h class="big ctext"><span id="numcode" class="bigger">0</span> lines of code written</h>
+</div>
+<div class="spaced" id="money">
+	<h class="big ctext">You have $<span id="nummoney" class="bigger ctext">0</span></h>
+</div>
+<div class="spaced" id="errors">
+	<h class="ctext"><span id="numerrors" class="big">0</span> errors were found in your most recent program <br>
+	You got $<span id="moneygot" class="big">0</span> from your last program, with a <span id="errorpercentage" class="big">0</span>% deduction for errors</h>
 </div>
 
-<div id="upgrades">
-	<table>
+<div class="spaced">
+	<button class="btn interact" id="writebutton" onclick="writecode()">Write code</button>
+	<button class="btndisable" id="programbutton" onclick="programcode()">Compile and sell program</button>
+</div>
 
+<hr>
+
+<div>
+	<h class="ctext">You have <span id="numprogrammers" class="big">0</span> hired programmers</h>
+</div>
+
+<br>
+
+<div>
+	<h class="ctext">You have <span id="nummanagers" class="big">0</span> hired managers</h>
+</div>
+
+<div class="spaced" id="autobuyers">
+	<button class="btndisable" id="programmer" onclick="hireprogrammer()">Hire a programmer</button>
+	<button class="btndisable" id="manager" onclick="hiremanager()">Hire a project manager</button>
+</div>
+
+<hr>
+
+<div class="spaced" id="upgrades">
+	<h class="big ctext">Upgrades</h>
 </div>
 
 </body>	
