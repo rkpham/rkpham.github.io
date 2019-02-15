@@ -1,35 +1,40 @@
-var game = {
-	product: 0,
-	money: 0,
-	worker0: 0,
-	worker1: 0,
-	worker2: 0,
-	worker3: 0,
-	worker4: 0,
-	worker0period: 1000,
-	worker1period: 9000,
-	worker2period: 80000,
-	worker3period: 700000,
-	worker4period: 6000000,
-	worker0mult: 1,
-	worker1mult: 10,
-	worker2mult: 100,
-	worker3mult: 1000,
-	worker4mult: 10000,
-	worker0cost: 10,
-	worker1cost: 100,
-	worker2cost: 1000,
-	worker3cost: 10000,
-	worker4cost: 100000,
-	sellprice: 0.5,
-	manualmulti: 1,
-	upgrades: [],
-	upgradeprices: [25,50,100,200,500,800,1000,1250,1600,2100,3000,4000],
-	resets: 0,
-	resetupgrades: [0, 0, 0],
-	timeelapsed: 0,
-	totalmoney: 0,
-	totalproduct: 0,
+if (localStorage.getItem('gameData')) {
+	var game = JSON.parse(localStorage.getItem('gameData'));
+} else {
+	var game = {
+		product: 0,
+		money: 0,
+		worker0: 0,
+		worker1: 0,
+		worker2: 0,
+		worker3: 0,
+		worker4: 0,
+		worker0period: 1000,
+		worker1period: 9000,
+		worker2period: 80000,
+		worker3period: 700000,
+		worker4period: 6000000,
+		worker0mult: 1,
+		worker1mult: 10,
+		worker2mult: 100,
+		worker3mult: 1000,
+		worker4mult: 10000,
+		worker0cost: 10,
+		worker1cost: 100,
+		worker2cost: 1000,
+		worker3cost: 10000,
+		worker4cost: 100000,
+		sellprice: 0.5,
+		manualmulti: 1,
+		upgrades: [],
+		upgradeprices: [25,50,100,200,500,800,1000,1250,1600,2100,3000,4000],
+		resets: 0,
+		resetupgrades: [0, 0, 0],
+		timeelapsed: 0,
+		totalmoney: 0,
+		totalproduct: 0,
+	}
+	console.log("fail");
 }
 
 var lastproduct = 0
@@ -38,6 +43,10 @@ var productps = 0
 var moneyps = 0
 
 var openbottombox = 'inset 0 2px 0 0 #e9ec34, inset 2px 0 0 0 #e9ec34, inset -2px 0 0 0 #e9ec34'
+
+setInterval(function() {
+	localStorage.setItem('gameData', JSON.stringify(game))
+}, 3000);
 
 function toggleinfo() {//called when clicking info at the bottom
 	$('#overlay').css('display', (($('#overlay').css('display') == 'none') ? 'block' : 'none'))//ternary operator, switches between showing and not showing overlay
