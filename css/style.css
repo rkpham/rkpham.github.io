@@ -1,6 +1,6 @@
 body {
 	background-color: #154261;
-	background-image: url('assets/background.png');
+	background-image: url('../assets/background.png');
 	text-align: center;
 	font-family: 'Source Sans Pro';
 }
