@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width'>
+		<title>Lemonade Empire</title>
+		<link href='style.css' rel='stylesheet' type='text/css' />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.0.2/decimal.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+		<script src='script.js'></script>
+		<script src="//cdn.rawgit.com/erosson/swarm-numberformat/v0.4.0/dist/swarm-numberformat.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> 
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id='game'>
+
+			<div id='footer'>
+				<h class='linky' onclick='toggleinfo()'>Info</h>
+			</div>
+
+			<div id='overlay'>
+				<div id='overlay_exit' class='glowey' onclick='toggleinfo()'>
+					<h>X</h>
+				</div>
+				<div id='overlay_textcontainer'>
+					<h class='bigger'>Info</h>
+					<br><br>
+					What is this game?
+					<br>
+					This is an incremental game. You have to increase the amount of money that you have.
+					<br>
+					<br>
+					How do I play?
+					<br>
+					Simply click the buttons, you'll learn from there.
+					<br>
+					<br>
+					Why did you make this game?
+					<br>
+					This game was intended for a school project.
+					<br>
+					<br>
+					<br>
+					WARNING: The game does not save, sorry.
+				</div>
+			</div>
+
+			<div id='top_code'>
+				<h class='bigger'><span id='indicator_product'>0</span> lemonades</h>
+				<br>
+				<!--<h><span id='indicator_productps'>0</span>/s</h>!-->
+				<br>
+				<button class='normal glowey btn' onclick='createproduct()'>Make Lemonade</button>
+			</div>
+
+			<div id='top_divider' class='style_lines'></div>
+
+			<div id='top_money'>
+				<h class='bigger'>$<span id='indicator_money'>0</span></h>
+				<br>
+				<!--<h><span id='indicator_moneyps'>0</span>/s</h>!-->
+				<br>
+				<button class='normal glowey btn' onclick='sellproduct()'>Sell Lemonades</button>
+			</div>
+
+			<div id='main_ui'>
+				<div id='resets_indicator'>
+					Reset points: <span id='resets_indicatorreal'>0</span>
+				</div>
+				<div id='tab_switchers'>
+					<button id='tab_autobuyers' class='normal glowey btn' onclick='switchtab(0)'>Producers</button>
+					<button id='tab_upgrades' class='normal glowey btn' onclick='switchtab(1)'>Upgrades</button>
+					<button id='tab_reset' class='normal glowey btn' onclick='switchtab(2)'>Resets</button>
+				</div>
+
+				<div id='main_content' class='style_lines'>
+					<div id='content_autobuyers'>
+						<div class='container_autobuyer'>
+							<button id='ab_0' class='normal glowey btn' onclick='hire(0)' style='width: 400px;'>Manual Juicer | <span>Cost: $<span id='ab_0_cost'>10.00</span></span></button>
+							<div class='backgroundbar'><div id='ab_0_progress' class='bar'></div></div>
+						</div>
+							<h style='float:left;margin: 5px;'>Rate: <span id='ab_0_ratemult'>1</span> lemonades/<span id='ab_0_rateperiod'>1</span> seconds</h>
+						<br>
+						<div class='normal abinfo'>
+							<h id='ab_0_info'>Currently: <span id='ab_0_indicator'>0</span>/<span id='ab_0_milestone'>10</span></h>
+						</div>
+
+						<br>
+						<br>
+						<br>
+
+						<div class='container_autobuyer'>
+							<button id='ab_1' class='normal glowey btn' onclick='hire(1)' style='width: 400px;'>Blender | <span>Cost: $<span id='ab_1_cost'>100.00</span></span></button>
+							<div class='backgroundbar'><div id='ab_1_progress' class='bar'></div></div>
+						</div>
+							<h style='float:left;margin: 5px;'>Rate: <span id='ab_1_ratemult'>10</span> lemonades/<span id='ab_1_rateperiod'>9</span> seconds</h>
+						<br>
+						<div class='normal abinfo'>
+							<h id='ab_1_info'>Currently: <span id='ab_1_indicator'>0</span>/<span id='ab_1_milestone'>10</span></h>
+						</div>
+
+						<br>
+						<br>
+						<br>
+
+						<div class='container_autobuyer'>
+							<button id='ab_2' class='normal glowey btn' onclick='hire(2)' style='width: 400px;'>Lemonade Stand | <span>Cost: $<span id='ab_2_cost'>1000.00</span></span></button>
+							<div class='backgroundbar'><div id='ab_2_progress' class='bar'></div></div>
+						</div>
+							<h style='float:left;margin: 5px;'>Rate: <span id='ab_2_ratemult'>100</span> lemonades/<span id='ab_2_rateperiod'>80</span> seconds</h>
+						<br>
+						<div class='normal abinfo'>
+							<h id='ab_2_info'>Currently: <span id='ab_2_indicator'>0</span>/<span id='ab_2_milestone'>10</span></h>
+						</div>
+
+						<br>
+						<br>
+						<br>
+
+						<div class='container_autobuyer'>
+							<button id='ab_3' class='normal glowey btn' onclick='hire(3)' style='width: 400px;'>Lemonade Bar | Cost: $<span id='ab_3_cost'>10000.00</span></span></button>
+							<div class='backgroundbar'><div id='ab_3_progress' class='bar'></div></div>
+						</div>
+							<h style='float:left;margin: 5px;'>Rate: <span id='ab_3_ratemult'>1000</span> lemonades/<span id='ab_3_rateperiod'>700</span> seconds</h>
+						<br>
+						<div class='normal abinfo'>
+							<h id='ab_3_info'>Currently: <span id='ab_3_indicator'>0</span>/<span id='ab_3_milestone'>10</span></h>
+						</div>
+
+						<br>
+						<br>
+						<br>
+
+						<div class='container_autobuyer'>
+							<button id='ab_4' class='normal glowey btn' onclick='hire(4)' style='width: 400px;'>Lemonade Convention | Cost: $<span id='ab_4_cost'>100000.00</span></span></button>
+							<div class='backgroundbar'><div id='ab_4_progress' class='bar'></div></div>
+						</div>
+							<h style='float:left;margin: 5px;'>Rate: <span id='ab_4_ratemult'>10000</span> lemonades/<span id='ab_4_rateperiod'>6000</span> seconds</h>
+						<br>
+						<div class='normal abinfo'>
+							<h id='ab_4_info'>Currently: <span id='ab_4_indicator'>0</span>/<span id='ab_4_milestone'>10</span></h>
+						</div>
+					</div>
+
+					<div id='content_upgrades'>
+						<button id='upgrade_0' class='normal glowey btn tooltipper' onclick='upgrade(0)'style='width: 300px;'>Ice
+							<div class='tooltip'>Manual production produces 1 extra | Cost: 25 </div>
+						</button>
+						<button id='upgrade_1' class='normal glowey btn tooltipper' onclick='upgrade(1)'style='width: 300px;'>Family Recipe
+							<div class='tooltip'>Lemonade sell price 50% more | Cost: 50</div>
+						</button>
+						<button id='upgrade_2' class='normal glowey btn tooltipper' onclick='upgrade(2)'style='width: 300px;'>Steel Juicers
+							<div class='tooltip'>Juicers produce 50% more | Cost: 100</div>
+						</button>
+						<button id='upgrade_3' class='normal glowey btn tooltipper' onclick='upgrade(3)'style='width: 300px;'>High End Blenders
+							<div class='tooltip'>Blenders produce 50% more | Cost: 200 </div>
+						</button>
+						<button id='upgrade_4' class='normal glowey btn tooltipper' onclick='upgrade(4)'style='width: 300px;'>Neon Signs
+							<div class='tooltip'>Lemonade stands produce 50% more | Cost: 500 </div>
+						</button>
+						<button id='upgrade_5' class='normal glowey btn tooltipper' onclick='upgrade(5)'style='width: 300px;'>Shop Furniture
+							<div class='tooltip'>Lemonade shops produce 50% more | Cost: 800 </div>
+						</button>
+						<button id='upgrade_6' class='normal glowey btn tooltipper' onclick='upgrade(6)'style='width: 300px;'>Lemon Merchandise
+							<div class='tooltip'>Lemonade conventions produce 50% more extra | Cost: 1000 </div>
+						</button>
+						<button id='upgrade_7' class='normal glowey btn tooltipper' onclick='upgrade(7)'style='width: 300px;'>Flavoring
+							<div class='tooltip'>Manual production produces 3 extra | Cost: 1250 </div>
+						</button>
+						<button id='upgrade_23' class='normal glowey btn tooltipper' onclick='upgrade(23)'style='width: 300px;'>Management
+							<div class='tooltip'>Unlock management tab | Cost: 1000 </div>
+						</button>
+						<button id='upgrade_8' class='normal glowey btn tooltipper' onclick='upgrade(8)'style='width: 300px;'>Fancy Cups
+							<div class='tooltip'>Lemonade sells 2x | Cost: 1600 </div>
+						</button>
+						<button id='upgrade_9' class='normal glowey btn tooltipper' onclick='upgrade(9)'style='width: 300px;'>Juicer Handles
+							<div class='tooltip'>Juicers 2x faster | Cost: 2000 </div>
+						</button>
+						<button id='upgrade_10' class='normal glowey btn tooltipper' onclick='upgrade(10)'style='width: 300px;'>10K RPM
+							<div class='tooltip'>Blenders 2x faster | Cost: 2500 </div>
+						</button>
+						<button id='upgrade_11' class='normal glowey btn tooltipper' onclick='upgrade(11)'style='width: 300px;'>Lemonade Vans
+							<div class='tooltip'>Lemonade stands 2x faster | Cost: 3100 </div>
+						</button>
+						<button id='upgrade_12' class='normal glowey btn tooltipper' onclick='upgrade(12)'style='width: 300px;'>Alcoholic Lemonade
+							<div class='tooltip'>Lemonade bars 2x faster | Cost: 3800 </div>
+						</button>
+						<button id='upgrade_13' class='normal glowey btn tooltipper' onclick='upgrade(13)'style='width: 300px;'>Lemonade Mascot
+							<div class='tooltip'>Conventions 2x faster | Cost: 4600 </div>
+						</button>
+						<button id='upgrade_14' class='normal glowey btn tooltipper' onclick='upgrade(14)'style='width: 300px;'>Professional Training
+							<div class='tooltip'>Manual production produces 5 extra | Cost: 5500 </div>
+						</button>
+						<button id='upgrade_15' class='normal glowey btn tooltipper' onclick='upgrade(15)'style='width: 300px;'>Artificial Coloring
+							<div class='tooltip'>Sell price 2x | Cost: 6500 </div>
+						</button>
+						<button id='upgrade_16' class='normal glowey btn tooltipper' onclick='upgrade(16)'style='width: 300px;'>Automated Juicers
+							<div class='tooltip'>Juicers produce 2x (isn't this just a blender?) | Cost: 7600 </div>
+						</button>
+						<button id='upgrade_17' class='normal glowey btn tooltipper' onclick='upgrade(17)'style='width: 300px;'>Nuclear Powered
+							<div class='tooltip'>Blenders produce 2x | Cost: 8800 </div>
+						</button>
+						<button id='upgrade_18' class='normal glowey btn tooltipper' onclick='upgrade(18)'style='width: 300px;'>Billboard Ads
+							<div class='tooltip'>Lemonade stands produce 2x | Cost: 10000 </div>
+						</button>
+						<button id='upgrade_19' class='normal glowey btn tooltipper' onclick='upgrade(19)'style='width: 300px;'>High Class Bar
+							<div class='tooltip'>Lemonade bars produce 2x | Cost: 11500 </div>
+						</button>
+						<button id='upgrade_20' class='normal glowey btn tooltipper' onclick='upgrade(20)'style='width: 300px;'>Lemon Ball Pit
+							<div class='tooltip'>Lemonade conventions produce 2x | Cost: 13500 </div>
+						</button>
+						<button id='upgrade_21' class='normal glowey btn tooltipper' onclick='upgrade(21)'style='width: 300px;'>Professional Training
+							<div class='tooltip'>Manual production produces 5 extra | Cost: 15000 </div>
+						</button>
+						<button id='upgrade_22' class='normal glowey btn tooltipper' onclick='upgrade(22)'style='width: 300px;'>Lemonade Mixes
+							<div class='tooltip'>Sell price 3x | Cost: 17500 </div>
+						</button>
+					</div>
+
+					<div id='content_reset'>
+						<button id='reset_button' class='normal glowey btn tooltipper' onclick='resetgame()'>RESET</button>
+						<br>
+						<button id='reset_upgrade0' class='glowey btn tooltipper' width='400' onclick='resetupgrade(0)'><h class='normal'>Sweeter Lemons</h><br><h>Points spent: <span id='reset_upgrade0spent'>0</span><br><span class='tooltip'>Lemonade sells for more</span></button>
+						<button id='reset_upgrade1' class='glowey btn tooltipper' width='400' onclick='resetupgrade(1)'><h class='normal'>Marketing</h><br><h>Points spent: <span id='reset_upgrade1spent'>0</span><br><span class='tooltip'>All producers faster</span></button>
+						<br>
+						<button id='reset_upgrade2' class='glowey btn tooltipper' width='400' onclick='resetupgrade(2)'><h class='normal'>Juicier Lemons</h><br><h>Points spent: <span id='reset_upgrade2spent'>0</span><br><span class='tooltip'>More lemonade produced</span></button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>
